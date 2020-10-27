@@ -1,22 +1,22 @@
 {
-  "name": "soccer",
-  "version": "1.0.0",
-  "description": "Organizing soccer tournaments and keeping track of player's individual performance",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vijaykumarkodari/soccer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vijaykumarkodari/soccer/issues"
-  },
-  "homepage": "https://github.com/vijaykumarkodari/soccer#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "soccer",
+    "version": "1.0.0",
+    "description": "Organizing soccer tournaments and keeping track of player's individual performance",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vijaykumarkodari/soccer.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vijaykumarkodari/soccer/issues"
+    },
+    "homepage": "https://github.com/vijaykumarkodari/soccer#readme",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
 }
