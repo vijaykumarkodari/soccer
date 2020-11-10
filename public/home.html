@@ -10,9 +10,31 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .responsive {
+            width: 100%;
+            height: 70%;
+        }
+        
+        #footer {
+            background: darkcyan;
+        }
+        
+        #body {
+            background: aliceblue;
+        }
+        
+        .jumb {
+            background: darkcyan;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 
-<body>
+<body id="body">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
         <div class="container-fluid">
             <a href="#" class="navbar-brand mr-3">Soccer-Spike</a>
@@ -34,37 +56,34 @@
         </div>
     </nav>
     <div class="container">
-        <div class="jumbotron">
-            <h1 style="text-align: center;">Hello World -->Team Pheonix</h1>
+        <div class="jumbotron jumb">
+            <h1 style="text-align: center;">Team Pheonix</h1>
             <h3>Learn to manage soccer tournaments</h3>
             <p class="lead">Soccer is a biggest sport played by many people across the world</p>
             <p><a class="btn btn-success btn-lg">Coming soon...</a></p>
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-4 col-xl-3">
-                <h2>Create tournament</h2>
-                <p>Coming soon.....................</p>
+                <h2>Tournament</h2>
+                <img src="./images/Tournment2.jpg" alt="Nature" class="responsive">
 
             </div>
             <div class="col-md-6 col-lg-4 col-xl-3">
-                <h2>Track user perfromance</h2>
-                <p>Coming soon.....................</p>
-
+                <h2>User stats</h2>
+                <img src="./images/user.png" alt="Nature" class="responsive">
             </div>
             <div class="col-md-6 col-lg-4 col-xl-3">
-                <h2>Create custom game</h2>
-                <p>Coming soon.....................</p>
-
+                <h2>Custom game</h2>
+                <img src="./images/team.jpg" alt="Nature" class="responsive">
             </div>
             <div class="col-md-6 col-lg-4 col-xl-3">
                 <h2>Soccer quiz</h2>
-                <p>Coming soon.....................</p>
-
+                <img src="./images/quize.jpeg" alt="Nature" class="responsive">
             </div>
 
         </div>
         <hr>
-        <footer>
+        <footer id="footer">
             <div class="row">
                 <div class="col-md-6">
                     <p>Copyright &copy; 2020 HCI project</p>
