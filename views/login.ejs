@@ -53,7 +53,7 @@
 
                     localStorage.setItem("userRole", JSON.parse(res).userRole);
                     localStorage.setItem("login", JSON.stringify(res));
-                    window.location.replace("http://localhost:3000/home");
+                    window.location.replace("http://soccer-spike.herokuapp.com/home");
 
 
                 },
@@ -76,7 +76,7 @@
                     alert("Successfully registered please login");
                     //localStorage.setItem("login", res);
                     setTimeout(() => {
-                        window.location.replace("http://localhost:3000/login");
+                        window.location.replace("http://soccer-spike.herokuapp.com/login");
                     }, 2000);
 
                 },

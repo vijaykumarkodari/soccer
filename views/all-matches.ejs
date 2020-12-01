@@ -138,7 +138,7 @@
 <script>
     $('#logoutId').click(function() {
         localStorage.clear();
-        window.location.replace("http://localhost:3000/login");
+        window.location.replace("http://soccer-spike.herokuapp.com/login");
     });
 
     function viewMatch(val) {
@@ -270,7 +270,7 @@
         console.log(user);
         $('#logoutId').click(function() {
             localStorage.clear();
-            window.location.replace("http://localhost:3000/login");
+            window.location.replace("http://soccer-spike.herokuapp.com/login");
         });
         var userRole = localStorage.getItem("userRole");
         if (userRole !== "scorer") {

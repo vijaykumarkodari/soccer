@@ -114,4 +114,5 @@ app.get('/all-nearby-matches', (req, resp) => {
 
 });
 // Listen on Port 3000
-app.listen(port, () => console.info(`App listening on port ${port}`))
+//app.listen(port, () => console.info(`App listening on port ${port}`))
+app.listen(process.env.PORT || port, () => console.info(`App listening on port ${port}`));

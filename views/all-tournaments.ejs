@@ -7,11 +7,11 @@
 <script>
     $('#logoutId').click(function() {
         localStorage.clear();
-        window.location.replace("http://localhost:3000/login");
+        window.location.replace("https://soccer-spike.herokuapp.com/login");
     });
 
     function viewMatches(val) {
-        location.replace("http://localhost:3000/tournament/getMatchesByTournamentId/" + val);
+        location.replace("https://soccer-spike.herokuapp.com/tournament/getMatchesByTournamentId/" + val);
     }
 
     function sheduleMatches(val) {

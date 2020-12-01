@@ -16,11 +16,11 @@
                     <h6>Personal Details</h6>
                     <div id="show">
 
-                      
+
                     </div>
                     <div id="edit">
                         <br>
-                        
+
                         <!-- <div style="float: right;">
                             <button type="button" class="btn  btn-success " onclick="OfferToolHandel()">Submit</button>
                         </div> -->
@@ -88,25 +88,25 @@
                 str += "<th scope=\"col\">Goal Misses</th><td>" + data.goalMisses + "</td></tr> </tbody></table>";
                 let t = document.getElementById("stats");
                 t.innerHTML = str;
-                console.log('str',data);;
+                console.log('str', data);;
 
                 let userData = data;
-                let row =  document.createElement('div');
-                row.className= 'row';
+                let row = document.createElement('div');
+                row.className = 'row';
                 let divmd5 = document.createElement('div');
-                divmd5.className =  'col-md-5';
+                divmd5.className = 'col-md-5';
                 let pelement5 = document.createElement('p');
-                pelement5.innerHTML='First Name';
+                pelement5.innerHTML = 'First Name';
                 let pelement6 = document.createElement('p');
-                pelement6.innerHTML='Last Name';
+                pelement6.innerHTML = 'Last Name';
                 let pelement = document.createElement('p');
-                pelement.innerHTML='Date of Birth';
+                pelement.innerHTML = 'Date of Birth';
                 let pelement1 = document.createElement('p');
-                pelement1.innerHTML='Team Name';
+                pelement1.innerHTML = 'Team Name';
                 let pelement2 = document.createElement('p');
-                pelement2.innerHTML='City';
+                pelement2.innerHTML = 'City';
                 let pelement3 = document.createElement('p');
-                pelement3.innerHTML='Zip';
+                pelement3.innerHTML = 'Zip';
                 divmd5.appendChild(pelement5)
                 divmd5.appendChild(pelement6)
                 divmd5.appendChild(pelement)
@@ -114,10 +114,10 @@
                 divmd5.appendChild(pelement2)
                 divmd5.appendChild(pelement3)
 
-                
+
                 let divmd7 = document.createElement('div');
-                divmd7.className =  'col-md-7';
-                divmd7.align="right";
+                divmd7.className = 'col-md-7';
+                divmd7.align = "right";
                 // let divIG = document.createElement('div');
                 // divIG.className =  'input-group';
                 // let input1 = document.createElement('input');
@@ -127,123 +127,123 @@
                 // input1.id = "firstName";
                 // input1.innerHTML = m.firstName.charAt(0).toUpperCase() + m.firstName.slice(1);
                 // divIG.appendChild(input1)
-                 let pelement7 = document.createElement('p');
-                 pelement7.innerHTML= userData.firstName.charAt(0).toUpperCase() +userData.firstName.slice(1);
-                 let pelement8 = document.createElement('p');
-                 pelement8.innerHTML= userData.lastName.charAt(0).toUpperCase() +userData.lastName.slice(1);
-                 let pelement9 = document.createElement('p');
-                 pelement9.innerHTML= '10-3-1989';
-                 let pelement10 = document.createElement('p');
-                 pelement10.innerHTML= userData.city
-                 let pelement11 = document.createElement('p');
-                 pelement11.innerHTML= userData.zip
-                // let pelement6 = document.createElement('p');
-                // pelement6.innerHTML='Last Name';
-                // let pelement = document.createElement('p');
-                // pelement.innerHTML='Date of Birth';
-                // let pelement1 = document.createElement('p');
-                // pelement1.innerHTML='Team Name';
-                // let pelement2 = document.createElement('p');
-                // pelement2.innerHTML='City';
-                // let pelement3 = document.createElement('p');
-                // pelement3.innerHTML='Zip';
-                 divmd7.appendChild(pelement7)
-                 divmd7.appendChild(pelement8)
-                 divmd7.appendChild(pelement9)
-                 divmd7.appendChild(pelement10)
-                 divmd7.appendChild(pelement11)
-                // divmd7.appendChild(pelement3)
-                
-                
-                let br =  document.createElement('br');
+                let pelement7 = document.createElement('p');
+                pelement7.innerHTML = userData.firstName.charAt(0).toUpperCase() + userData.firstName.slice(1);
+                let pelement8 = document.createElement('p');
+                pelement8.innerHTML = userData.lastName.charAt(0).toUpperCase() + userData.lastName.slice(1);
+                let pelement9 = document.createElement('p');
+                pelement9.innerHTML = '10-3-1989';
+                let pelement10 = document.createElement('p');
+                pelement10.innerHTML = userData.city
+                let pelement11 = document.createElement('p');
+                pelement11.innerHTML = userData.zip
+                    // let pelement6 = document.createElement('p');
+                    // pelement6.innerHTML='Last Name';
+                    // let pelement = document.createElement('p');
+                    // pelement.innerHTML='Date of Birth';
+                    // let pelement1 = document.createElement('p');
+                    // pelement1.innerHTML='Team Name';
+                    // let pelement2 = document.createElement('p');
+                    // pelement2.innerHTML='City';
+                    // let pelement3 = document.createElement('p');
+                    // pelement3.innerHTML='Zip';
+                divmd7.appendChild(pelement7)
+                divmd7.appendChild(pelement8)
+                divmd7.appendChild(pelement9)
+                divmd7.appendChild(pelement10)
+                divmd7.appendChild(pelement11)
+                    // divmd7.appendChild(pelement3)
+
+
+                let br = document.createElement('br');
                 row.appendChild(divmd5);
                 row.appendChild(divmd7);
                 row.appendChild(br);
                 document.getElementById('show').appendChild(row);
 
 
-                
 
 
-                let row2 =  document.createElement('div');
-                row2.className= 'row';
+
+                let row2 = document.createElement('div');
+                row2.className = 'row';
                 let divmd15 = document.createElement('div');
-                divmd15.className =  'col-md-5';
+                divmd15.className = 'col-md-5';
                 let pelement15 = document.createElement('p');
-                pelement15.innerHTML='First Name';
+                pelement15.innerHTML = 'First Name';
                 let pelement16 = document.createElement('p');
-                pelement16.innerHTML='Last Name';
+                pelement16.innerHTML = 'Last Name';
                 let pelement17 = document.createElement('p');
-                pelement17.innerHTML='Date of Birth';
+                pelement17.innerHTML = 'Date of Birth';
                 let pelement18 = document.createElement('p');
-                pelement18.innerHTML='Team Name';
+                pelement18.innerHTML = 'Team Name';
                 let pelement19 = document.createElement('p');
-                pelement19.innerHTML='City';
+                pelement19.innerHTML = 'City';
                 let pelement20 = document.createElement('p');
-                pelement20.innerHTML='Zip';
+                pelement20.innerHTML = 'Zip';
                 divmd15.appendChild(pelement15);
-                let br8 =  document.createElement('br');
+                let br8 = document.createElement('br');
                 divmd15.appendChild(br8);
                 divmd15.appendChild(pelement16)
-                let br9 =  document.createElement('br');
+                let br9 = document.createElement('br');
                 divmd15.appendChild(br9);
                 divmd15.appendChild(pelement17)
-                let br10 =  document.createElement('br');
+                let br10 = document.createElement('br');
                 divmd15.appendChild(br10);
                 divmd15.appendChild(pelement18)
-                let br11 =  document.createElement('br');
+                let br11 = document.createElement('br');
                 divmd15.appendChild(br11);
                 divmd15.appendChild(pelement19)
-                let br12 =  document.createElement('br');
+                let br12 = document.createElement('br');
                 divmd15.appendChild(br12);
                 divmd15.appendChild(pelement20)
-                let br13 =  document.createElement('br');
+                let br13 = document.createElement('br');
                 divmd15.appendChild(br13);
 
-                let row1 =  document.createElement('div');
-                row1.className= 'row';
+                let row1 = document.createElement('div');
+                row1.className = 'row';
                 let divmd71 = document.createElement('div');
-                divmd71.className =  'col-md-7';
-                divmd71.align="right";
+                divmd71.className = 'col-md-7';
+                divmd71.align = "right";
                 let divIG = document.createElement('div');
-                divIG.className =  'input-group';
+                divIG.className = 'input-group';
                 let input1 = document.createElement('input');
                 input1.type = 'text';
-                input1.className="form-control border-0 bg-light";
-                input1.style="color: #28A745";
+                input1.className = "form-control border-0 bg-light";
+                input1.style = "color: #28A745";
                 input1.id = "firstName";
                 input1.value = m.firstName.charAt(0).toUpperCase() + m.firstName.slice(1);
                 divIG.appendChild(input1);
-                
+
 
                 let divIG1 = document.createElement('div');
-                divIG1.className =  'input-group';
+                divIG1.className = 'input-group';
                 let input2 = document.createElement('input');
                 input2.type = 'text';
-                input2.className="form-control border-0 bg-light";
-                input2.style="color: #28A745";
+                input2.className = "form-control border-0 bg-light";
+                input2.style = "color: #28A745";
                 input2.id = "lastName";
                 input2.value = m.lastName.charAt(0).toUpperCase() + m.lastName.slice(1);
                 divIG1.appendChild(input2)
 
 
                 let divIG2 = document.createElement('div');
-                divIG2.className =  'input-group';
+                divIG2.className = 'input-group';
                 let input3 = document.createElement('input');
                 input3.type = 'text';
-                input3.className="form-control border-0 bg-light";
-                input3.style="color: #28A745";
+                input3.className = "form-control border-0 bg-light";
+                input3.style = "color: #28A745";
                 input3.id = "birthDate";
                 input3.value = '10-3-1389';
                 divIG2.appendChild(input3)
 
 
                 let divIG3 = document.createElement('div');
-                divIG3.className =  'input-group';
+                divIG3.className = 'input-group';
                 let input4 = document.createElement('input');
                 input4.type = 'text';
-                input4.className="form-control border-0 bg-light";
-                input4.style="color: #28A745";
+                input4.className = "form-control border-0 bg-light";
+                input4.style = "color: #28A745";
                 input4.id = "teamName";
                 input4.value = m.teamName;
                 divIG3.appendChild(input4)
@@ -251,70 +251,70 @@
 
 
                 let divIG4 = document.createElement('div');
-                divIG4.className =  'input-group';
+                divIG4.className = 'input-group';
                 let input5 = document.createElement('input');
                 input5.type = 'text';
-                input5.className="form-control border-0 bg-light";
-                input5.style="color: #28A745";
+                input5.className = "form-control border-0 bg-light";
+                input5.style = "color: #28A745";
                 input5.id = "city";
                 input5.value = m.city;
                 divIG4.appendChild(input5)
 
-                
+
 
                 let divIG5 = document.createElement('div');
-                divIG5.className =  'input-group';
+                divIG5.className = 'input-group';
                 let input6 = document.createElement('input');
                 input6.type = 'text';
-                input6.className="form-control border-0 bg-light";
-                input6.style="color: #28A745";
+                input6.className = "form-control border-0 bg-light";
+                input6.style = "color: #28A745";
                 input6.id = "zip";
                 input6.value = m.zip;
                 divIG5.appendChild(input6)
-                
-                  divmd71.appendChild(divIG);
-                  let br2 =  document.createElement('br');
-                  divmd71.appendChild(br2);
-                  divmd71.appendChild(divIG1)
-                  let br3 =  document.createElement('br');
-                  divmd71.appendChild(br3);
-                  divmd71.appendChild(divIG2)
-                  let br4 =  document.createElement('br');
-                  divmd71.appendChild(br4);
-                  divmd71.appendChild(divIG3)
-                  let br5 =  document.createElement('br');
-                  divmd71.appendChild(br5);
-                  divmd71.appendChild(divIG4)
-                  let br6 =  document.createElement('br');
-                  divmd71.appendChild(br6);
-                  divmd71.appendChild(divIG5)
-                  let br7 =  document.createElement('br');
-                  divmd71.appendChild(br7);
+
+                divmd71.appendChild(divIG);
+                let br2 = document.createElement('br');
+                divmd71.appendChild(br2);
+                divmd71.appendChild(divIG1)
+                let br3 = document.createElement('br');
+                divmd71.appendChild(br3);
+                divmd71.appendChild(divIG2)
+                let br4 = document.createElement('br');
+                divmd71.appendChild(br4);
+                divmd71.appendChild(divIG3)
+                let br5 = document.createElement('br');
+                divmd71.appendChild(br5);
+                divmd71.appendChild(divIG4)
+                let br6 = document.createElement('br');
+                divmd71.appendChild(br6);
+                divmd71.appendChild(divIG5)
+                let br7 = document.createElement('br');
+                divmd71.appendChild(br7);
                 //  divmd71.appendChild(pelement11)
                 // divmd7.appendChild(pelement3)
-                
-                
-                let br1 =  document.createElement('br');
+
+
+                let br1 = document.createElement('br');
                 row1.appendChild(divmd15);
-                 row1.appendChild(divmd71);
+                row1.appendChild(divmd71);
                 row1.appendChild(br1);
-                let buttonDiv =  document.createElement('div');
-                buttonDiv.align =" right;";
+                let buttonDiv = document.createElement('div');
+                buttonDiv.align = " right;";
                 let button = document.createElement('button');
-                button.type='button';
-                button.className='btn  btn-success';
-                button.onclick = function () {
+                button.type = 'button';
+                button.className = 'btn  btn-success';
+                button.onclick = function() {
                     OfferToolHandel()
                 }
                 button.innerHTML = 'Submit';
                 buttonDiv.appendChild(button);
                 row1.appendChild(buttonDiv);
                 document.getElementById('edit').appendChild(row1)
-                
+
             }
         });
-        tag.style="color: #e85a4f;"
-        tag.innerHTML = m.firstName.charAt(0).toUpperCase() + m.firstName.slice(1) + " " +  m.lastName.charAt(0).toUpperCase() + m.lastName.slice(1);
+        tag.style = "color: #e85a4f;"
+        tag.innerHTML = m.firstName.charAt(0).toUpperCase() + m.firstName.slice(1) + " " + m.lastName.charAt(0).toUpperCase() + m.lastName.slice(1);
         // debugger;
 
 
