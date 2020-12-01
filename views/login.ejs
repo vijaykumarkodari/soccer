@@ -1,0 +1,89 @@
+<div class="login-page">
+    <div class="form">
+        <form class="register-form" id="registerFormId">
+            <fieldset>
+                <input name="firstName" type="text" placeholder="First name" required/>
+                <input name="lastName" type="text" placeholder="Last name" required/>
+                <input name="userName" type="text" placeholder="User Name" required/>
+                <input name="password" id="password1" type="password" placeholder="Password" required/>
+                <input name="team" type="text" placeholder="Team Name" />
+                <input name="userRole" type="text" placeholder="User role" />
+                <input name="email" type="text" placeholder="Email address" />
+                <input name="phoneNumber" type="text" placeholder="Phone number" />
+                <input name="city" type="text" placeholder="City" required/>
+                <input name="zipcode" type="text" placeholder="Zip code" required/>
+                <button id="register" style="
+                background-color: #da7b93;">Register</button>
+                <p class="message">Already registered? <a href="#" style="color: #007bff;"><strong>Log In</strong> </a></p>
+            </fieldset>
+        </form>
+        <form class="login-form" id="loginformId">
+            <input name="username" id="userName" type="text" placeholder="username" required/>
+            <input name="password" id="password" type="password" placeholder="password" required/>
+            <button id="loginButtion" style="
+            background-color:#da7b93;">Login</button>
+            <label></label>
+            <button class="social-signin google"><a href="/auth/google" style="color: white;">Log in with Google+</a></button>
+            <p class="message">Not registered? <a href="#" style="color: #007bff;"><strong> Create an account</strong></a></p>
+        </form>
+    </div>
+</div>
+<Script>
+    $(document).ready(function() {
+        $('.message a').click(function() {
+
+            $('form').animate({
+                height: "toggle",
+                opacity: "toggle"
+            }, "slow");
+        });
+    });
+    $('#loginButtion').click(
+
+
+        function() {
+            $.ajax({
+                url: '/auth/local',
+                type: 'POST',
+                data: $('#loginformId').serialize(),
+                success: function(res) {
+
+                    console.log('form submitted.' + res);
+                    console.log(JSON.parse(res).userRole);
+
+                    localStorage.setItem("userRole", JSON.parse(res).userRole);
+                    localStorage.setItem("login", JSON.stringify(res));
+                    window.location.replace("http://localhost:3000/home");
+
+
+                },
+                error: function(request, status, error) {
+                    alert("Invalid login credentials");
+                }
+            });
+            // alert("invalid login");
+            return false;
+        });
+
+    $('#register').click(
+        function() {
+            $.ajax({
+                url: '/user/signup',
+                type: 'POST',
+                data: $('#registerFormId').serialize(),
+                success: function(res) {
+                    console.log('form submitted.' + res);
+                    alert("Successfully registered please login");
+                    //localStorage.setItem("login", res);
+                    setTimeout(() => {
+                        window.location.replace("http://localhost:3000/login");
+                    }, 2000);
+
+                },
+                error: function(request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+            return false;
+        });
+</Script>

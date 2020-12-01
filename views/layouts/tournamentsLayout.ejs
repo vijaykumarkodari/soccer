@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%- title %>
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <%- include('../partials/header.ejs') %>
+            <nav class="navbar navbar-expand-md navbar-dark mb-3" style="background-color: #2a1b3d;">
+                <div class="container-fluid">
+                    <a href="/" class="navbar-brand mr-3" style="color: #e85a4f;">Soccer-Spike</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav">
+                            <a href="/" class="nav-item nav-link active" style="color: #e85a4f;">Home</a>
+                            <a class="nav-item nav-link" href="allTournaments" style="color: #e85a4f;">Tournments</a>
+                            <a class="nav-item nav-link" href="user-statistics" style="color: #e85a4f;">User Statistics</a>
+                            <a class="nav-item nav-link" href="all-nearby-matches" style="color: #e85a4f;">Friendly Matches</a>
+                            <a class="nav-item nav-link" href="quiz" style="color: #e85a4f;">Quiz</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <label class="nav-item nav-link" id="logoutId" style="color: #e85a4f;">Logout</label>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+            <main>
+                <ul class="nav nav-tabs navbar-dark" style="background-color: #2a1b3d;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/allTournaments" style="color: #e85a4f;">All Tournaments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scorer" href="/addTeam" style="color: #e85a4f;">Create Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scorer" href="/createTournament" style="color: #e85a4f;">Create Tournament</a>
+                    </li>
+
+                </ul>
+                <%- body %>
+            </main>
+            <%- include('../partials/footer.ejs') %>
+
+    </div>
+
+
+</body>
+<script>
+    $(document).ready(function() {
+        var userRole = localStorage.getItem("userRole");
+        if (userRole !== "scorer") {
+            $(".scorer").css("display", "none");
+        }
+        $('#logoutId').click(function() {
+            localStorage.clear();
+            window.location.replace("http://localhost:3000/login");
+        });
+    });
+</script>
+
+</html>

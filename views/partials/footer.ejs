@@ -1,0 +1,23 @@
+<footer id="footer">
+    <div class="row">
+        <div class="col-md-6">
+            <p>Copyright &copy; 2020 HCI project</p>
+        </div>
+        <div class="col-md-6 text-md-right">
+            <a href="#" class="text-dark">Terms of Use</a>
+            <span class="text-muted mx-2">|</span>
+            <a href="#" class="text-dark">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+<Script>
+    $(document).ready(function() {
+        setTimeout(() => {
+            var k = localStorage.getItem("login");
+            if (k === null) {
+                window.location.replace("http://localhost:3000/login");
+            }
+        }, 3000);
+
+    });
+</Script>

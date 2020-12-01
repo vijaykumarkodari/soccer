@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%- title %>
+    </title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <%- include('../partials/header.ejs') %>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+                <div class="container-fluid">
+                    <a href="/" class="navbar-brand mr-3">Soccer-Spike</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav">
+                            <a href="/" class="nav-item nav-link active">Home</a>
+                            <a class="nav-item nav-link" href="allTournaments">Tournments</a>
+                            <a class="nav-item nav-link" href="user-statistics">User Statistics</a>
+                            <a class="nav-item nav-link" href="all-nearby-matches">Friendly Matches</a>
+                            <a class="nav-item nav-link" href="quiz">Quiz</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <label class="nav-item nav-link" id="logoutId">Logout</label>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+            <main>
+                <ul class="nav nav-tabs navbar-dark bg-dark">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/allTournaments">All Tournaments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addTeam">Add/remove Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/createTournament">Create Tournament</a>
+                    </li>
+
+                </ul>
+                <%- body %>
+            </main>
+            <%- include('../partials/footer.ejs') %>
+
+    </div>
+
+
+</body>
+<script>
+    $(document).ready(function() {
+        $('#logoutId').click(function() {
+            localStorage.clear();
+            window.location.replace("http://localhost:3000/login");
+        });
+    });
+</script>
+
+</html>

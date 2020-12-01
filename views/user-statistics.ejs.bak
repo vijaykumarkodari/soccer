@@ -1,0 +1,126 @@
+<div class="container-fluid">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div class="container">
+            <h1 class="display-4" id="playerName"></h1>
+            <p class="lead">Soccer player statistics</p>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3" style="background-color: #f3f3f3;">
+                    <br>
+                    <div class="btn-group" style="float: right;">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editPerson()" id="editButton"> Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editCanelPerson()" id="editCanButton"> Cancel</button>
+
+                    </div>
+                    <h6>Personal Details</h6>
+                    <div id="show">
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p>Date of Birth</p>
+                                <p>Birth Place</p>
+                            </div>
+                            <div class="col-md-7" align="right">
+                                <p>10-3-1989</p>
+                                <p>Las Cruces</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="edit">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p>Date of Birth</p>
+                                <p>Birth Place</p>
+                            </div>
+                            <div class="col-md-7" align="right">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Date og Birth" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="color: #28A745;" id="birthDate">
+
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <input type="text" placeholder="Birth Place" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="color: #28A745;" id="birthPlace">
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="float: right;">
+                            <button type="button" class="btn  btn-success " onclick="OfferToolHandel()">Submit</button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-9">
+                    <div class=" p-3 bg-white rounded shadow-sm" id="stats">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    #editButton,
+    #show {
+        display: block;
+    }
+    
+    #editCanButton,
+    #edit {
+        display: none;
+    }
+</style>
+
+<script>
+    const editPerson = () => {
+        document.getElementById('editButton').style.display = 'none';
+        document.getElementById('editCanButton').style.display = 'block'
+        document.getElementById('show').style.display = 'none';
+        document.getElementById('edit').style.display = 'block'
+    }
+
+    const editCanelPerson = () => {
+        document.getElementById('editButton').style.display = 'block';
+        document.getElementById('editCanButton').style.display = 'none'
+        document.getElementById('show').style.display = 'block';
+        document.getElementById('edit').style.display = 'none'
+    }
+    $(document).ready(function() {
+        var k = localStorage.getItem("login");
+
+        // k = JSON.stringify(k);
+        let p = JSON.parse(k);
+        console.log(p);
+        let m = JSON.parse(p);
+        let tag = document.getElementById("playerName");
+        $.ajax({
+            url: '/user/getUserInfoById/' + m.googleId,
+            type: 'GET',
+            success: function(res) {
+                console.log('got data.' + res);
+                let data = JSON.parse(res);
+                str = "<table class=\"table\"><thead><tr><th scope=\"col\">#</th><th scope=\"col\">Attribute</th><th scope=\"col\">Numbers</th>";
+                str += "</tr></thead><tbody><tr><th scope=\"row\">1</th><th scope=\"col\">Player Ranking</th><td>" + data.ranking + "</td></tr><tr>";
+                str += "<th scope=\"row\">2</th><th scope=\"col\">Matches</th><td>" + data.matches + "</td></tr><tr><th scope=\"row\">3</th>";
+                str += "<th scope=\"col\">Goals</th><td>" + data.goals + "</td></tr><tr><th scope=\"row\">4</th><th scope=\"col\">Passes</th>";
+                str += "<td>" + data.passes + "</td></tr><tr><th scope=\"row\">5</th><th scope=\"col\">Goal Attempts</th><td>" + data.goalAttempts + "</td></tr><tr>";
+                str += "<th scope=\"row\">6</th><th scope=\"col\">Saves</th><td>" + data.saves + "</td></tr><tr><th scope=\"row\">7</th>";
+                str += "<th scope=\"col\">Goal Misses</th><td>" + data.goalMisses + "</td></tr> </tbody></table>";
+                let t = document.getElementById("stats");
+                t.innerHTML = str;
+                console.log(str);
+            }
+        });
+        tag.innerHTML = m.firstName + " " + m.lastName;
+        // debugger;
+
+
+    });
+</script>

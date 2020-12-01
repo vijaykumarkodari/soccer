@@ -1,0 +1,116 @@
+<style type="text/css">
+
+</style>
+
+
+<div class="login-page">
+    <div class="form">
+        <form class="create-tournament-form" id="createTournamentId">
+            <fieldset>
+                <div class="multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select>
+                        <option>Select an option</option>
+                      </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes" style="overflow: scroll;height: 150px;>
+                        <label for="one">
+                        <input type="checkbox" id="one" />First checkbox</label>
+                        <label for="two">
+                        <input type="checkbox" id="two" />Second checkbox</label>
+                        <label for="three">
+                        <input type="checkbox" id="three" />Third checkbox</label>
+                    </div>
+                </div>
+<br>
+                <input name="tournamentName" type="text" placeholder="Tournament name" required/>
+                <input name="city" type="text" placeholder="City name" required/>
+                <input name="zip" type="text" placeholder="Zip code" required/>
+                <br/>
+
+                <label></label>
+                <button id="createTournament" style="
+                background-color: mediumpurple;">Create Tournament</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+
+<Script>
+    // let jsonResopnce
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+    $(document).ready(function() {
+        //var select = document.getElementsByTagName('select');
+
+
+        $.ajax({
+            url: '/tournament/getTeams',
+            type: 'Get',
+            success: function(res) {
+                // console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+
+                var optionsAsString = "";
+                let lielememt = ""
+                res = JSON.parse(res);
+                for (var i = 0; i < res.length; i++) {
+                    // console.log(res[i]);
+                    optionsAsString += " <label><input name=\"team" + i + "\" type=\"checkbox\" value=\"" + res[i].teamName + "\" />" + res[i].teamName + "</label>";
+
+                    // lielememt += "<li><a tabindex=\"0\"><label class=\"checkbox\"><input type=\"checkbox\" value='" + res[i].userName + "'>" + res[i].userName + "</label></a></li>"
+                }
+                console.log(optionsAsString);
+                var t = document.getElementById("checkboxes");
+                t.innerHTML = optionsAsString;
+                //  console.log(lielememt);
+                // $('#multiselect').append(optionsAsString);
+                // let ulelement = document.getElementsByClassName("multiselect-container dropdown-menu show")
+
+                // ulelement.append(lielememt);
+            }
+        });
+
+
+
+
+        // $('.mdb-select').materialSelect();
+
+
+
+
+    });
+
+
+
+    $('#createTournament').click(
+        function() {
+            $.ajax({
+                url: '/tournament/createTournament',
+                type: 'POST',
+                data: $('#createTournamentId').serialize(),
+                success: function(res) {
+                    console.log('form submitted.' + res);
+                    alert("Tournment created successfully");
+                    window.reload();
+                    //localStorage.setItem("login", res);
+                },
+                error: function(req, resp, err) {
+                    alert(req.responseText);
+                }
+            });
+        });
+</Script>

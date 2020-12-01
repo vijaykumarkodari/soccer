@@ -1,0 +1,91 @@
+<h1 style="text-align: center;color: #e85a4f;">Tournaments</h1>
+
+<div class="container-fluid">
+    <div class="row " id="parentDiv">
+    </div>
+</div>
+<script>
+    function viewMatches(val) {
+        location.replace("http://localhost:3000/tournament/getMatchesByTournamentId/" + val);
+    }
+
+    function sheduleMatches(val) {
+        //console.log(val);
+        $.ajax({
+            url: '/tournament/getTournamentInfoById/' + val,
+            type: 'GET',
+            success: function(res) {
+                // console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+                res = JSON.parse(res);
+                var matches = [];
+                var cnt = 1;
+                var tomorrow = new Date();
+                for (var i = 0; i < res.teams.length; i++) {
+                    for (var j = i + 1; j < res.teams.length; j++) {
+                        var match = {
+                            "teamOne": res.teams[i],
+                            "teamTwo": res.teams[j],
+                            "matchDate": tomorrow.setDate(tomorrow.getDate() + 1),
+                            "tournamentName": res.tournamentName,
+                            "city": res.city,
+                            "zip": res.zip,
+                            "tournamentId": res.tournamentId,
+                            "matchNumber": cnt++
+                        };
+                        matches.push(match);
+
+                    }
+                }
+                $.ajax({
+                    url: '/tournament/sheduleMatches',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(matches),
+                    success: function(res) {
+                        // console.log('form shedule submitted.' + res);
+                        //alert('Successfuly Sheduled');
+                        alert(res);
+                        //localStorage.setItem("login", res);
+                    }
+                });
+
+            }
+        });
+    }
+    $(document).ready(function() {
+
+        $.ajax({
+            url: '/tournament/getAllTournaments',
+            type: 'GET',
+            success: function(res) {
+                //console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+                res = JSON.parse(res);
+                var child = "";
+                var i = 0;
+                res.forEach(element => {
+                    // console.log(element);
+                    //debugger;
+                    child += " <div class=\"col-md-3\" ><div class=\"row no-gutters border rounded overflow-hidden";
+                    child += "  flex-md-row mb-4 shadow-sm h-md-250 position-relative\"><div class=\"col p-3 d-flex flex-column position-static\" style=\"background:white\">";
+                    child += "<strong class=\"d-inline-block mb-2 text-success\">" + element.tournamentName + "</strong> <h3 class=\"mb-0\" style=\"color: #e85a4f;\">"
+                    child += " Venue: " + element.city + "</h3><div class=\"mb-1 text-muted\">" + new Date(element.createdOn) + "</div>";
+                    child += " <div class=\"row\" style=\"padding-left:15px\"><label align=\" left\" onclick=\"viewMatches(\'" + element.tournamentId + "\'" + ")\" class=\"card-link\" ";
+                    child += "style=\"text-align:left;color:blue;cursor: pointer;\">View Matches</label><label name=\"" + element.tournamentName + "\" onclick=\"sheduleMatches(\'" + element.tournamentName + "\'" + ")\" class=\"card-link\" align=\" right\" style=\"text-align:right;color:blue;cursor: pointer;\">Shedule Matches</label></div></div> <div class=\"col-auto d-none d-lg-block\">";
+                    child += "</div> </div></div>";
+                    i++;
+                    if (i % 2 == 0)
+                        child += "</div>";
+                });
+                if (i % 2 == 1)
+                    child += "</div>";
+                var tag = document.getElementById("parentDiv");
+                // tag.appendChild(element);
+                tag.innerHTML = child;
+                // console.log(tag);
+            }
+        });
+
+    });
+</script>

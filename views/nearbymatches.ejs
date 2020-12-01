@@ -1,0 +1,205 @@
+<h1 style="text-align: center;color: #e85a4f;">
+    Near By Matches</h1>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <%var i=0 %>
+                <% for( let i =0; i < data.length; i++) { %>
+
+                    <div class="col-md-4">
+                        <div class=" no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-3 d-flex flex-column position-static" style="background:white">
+                                <strong class="d-inline-block mb-2 text-success">Tournament :
+
+                    <%= data[i].tournamentName %>
+                </strong>
+                                <h3 class="mb-0" style="color: #e85a4f;">
+                                    <%= data[i].teamOne.teamName %> vs
+                                        <%= data[i].teamTwo.teamName %>
+                                </h3>
+                                <h3 class="mb-0">
+                                    <%= data[i].city %>
+                                </h3>
+                                <div class="mb-1 text-muted">
+                                    <%= data[i].matchDate %>
+                                </div>
+                                <div class="row">
+                                    <p><label class="btn    btn-block" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="viewMatch(' <%= data[i].matchId %> ')" class="card-link" style="text-align:left;color:blue; margin-right: 10px;">View Match details</label></p>
+                                    <p> <label class="btn    btn-block scorer" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="updateMatch(' <%= data[i].matchId %> ')" class="card-link" style="text-align:right;color:blue;margin-left: 10px;">Update Match Status</label></p>
+                                </div>
+                                <div class="row">
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <% } %>
+
+
+        </div>
+    </div>
+</div>
+<label></label>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Submit Tool</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div style="padding: 10px;">
+                    <form id="matchUpdate">
+                        <div id="data"></div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn  btn-success " onclick="OfferToolHandel()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    function viewMatch(val) {
+        console.log(val);
+
+        $.ajax({
+            url: '/tournament/getMatchById/' + val,
+            type: 'GET',
+            success: function(res) {
+                console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+                res = JSON.parse(res);
+                var str = "<div style=\"margin-left:300px\" > <div class=\"row\"> <h2   style=\"color:crimson\"> " + res.teamOne.teamName.charAt(0).toUpperCase() + res.teamOne.teamName.slice(1) + " vs " + res.teamTwo.teamName.charAt(0).toUpperCase() + res.teamTwo.teamName.slice(1) + " </h2> </div>  ";
+                str += "<div class=\"row\" style=\"margin-left:70px\" ><h2 style=\"color:blue\"> " + res.teamOne.teamScore + "&nbsp;" + + +res.teamTwo.teamScore + " </h2></div></div>"
+                str += "<div class=\"form-row\"><div class=\"col-md-4 mb-3\"><label for=\"matchNumber\">Match Number</label>";
+                str += " <input type=\"text\" class=\"form-control\" id=\"matchNumber\" placeholder=\"MatchNumber\" value=\"" + res.matchNumber + "\" readonly disabled>";
+                str += "</div><div class=\"col-md-4 mb-3\"><label for=\"matchPlace\">Match Place</label>";
+                str += "<input type=\"text\" class=\"form-control\" id=\"matchPlace\" placeholder=\"Match Place\" value=\"" + res.city + "\" readonly disabled>";
+                str += "</div><div class=\"col-md-4 mb-3\"><label for=\"matchStatus\">Match Status</label> <div class=\"input-group\">";
+                str += "<input type=\"text\" class=\"form-control\" id=\"matchStatus\" placeholder=\"Match Status\" aria-describedby=\"inputGroupPrepend\" required value=\"" + res.matchStatus + "\" readonly disabled>";
+                str += "</div></div></div>";
+                str += "<div class=\"form-row\"><h1 style=\"text-align=center\">" + res.teamOne.teamName + "</h1> ";
+                str += "<div class=\"table-responsive\"> <table class=\"table\"><thead class=\"thead-dark\"><tr><th scope=\"col\">#</th><th scope=\"col\">Player Name</th>";
+                str += "<th scope=\"col\">Score</th><th scope=\"col\">Passes</th><th scope=\"col\">Saves</th><th scope=\"col\">Attempts</th>";
+                str += "<th scope=\" col \">Misses</th></tr></thead>";
+                for (var i = 0; i < res.teamOne.players.length; i++) {
+                    str += "<tbody><tr><th scope=\"row\">" + i + 1 + "</th>";
+                    str += "<td><input type=\"text\" placeholder=\"Enter player name\" value=\"" + res.teamOne.players[i].firstName + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter Score\" value=\"" + res.teamOne.players[i].goals + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter passes\" value=\"" + res.teamOne.players[i].passes + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter saves\" value=\"" + res.teamOne.players[i].goalAttempts + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter goal attempts\" value=\"" + res.teamOne.players[i].saves + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter misses\" value=\"" + res.teamOne.players[i].goalMisses + "\" readonly disabled></td></tr></tbody>";
+                }
+                str += "</table></div></div>";
+
+                str += "<div class=\"form-row\"><h1 style=\"text-align=center\">" + res.teamTwo.teamName + "</h1>";
+                str += "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"thead-dark\"><tr><th scope=\"col\">#</th><th scope=\"col\">Player Name</th>";
+                str += "<th scope=\"col\">Score</th><th scope=\"col\">Passes</th><th scope=\"col\">Saves</th><th scope=\"col\">Attempts</th>";
+                str += "<th scope=\" col \">Misses</th></tr></thead>";
+                for (var i = 0; i < res.teamTwo.players.length; i++) {
+                    str += "<tbody><tr><th scope=\"row\">" + i + 1 + "</th>";
+                    str += "<td><input type=\"text\" placeholder=\"Enter player name\" value=\"" + res.teamTwo.players[i].firstName + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter Score\" value=\"" + res.teamTwo.players[i].goals + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter passes\" value=\"" + res.teamTwo.players[i].passes + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter saves\" value=\"" + res.teamTwo.players[i].goalAttempts + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter goal attempts\" value=\"" + res.teamTwo.players[i].saves + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter misses\" value=\"" + res.teamTwo.players[i].goalMisses + "\" readonly disabled></td></tr></tbody>";
+                }
+                str += "</table></div></div>";
+                var tag = document.getElementById('data');
+                tag.innerHTML = str;
+            }
+        });
+        console.log(val) + "out";
+
+    }
+
+    function OfferToolHandel() {
+        var id = document.getElementById("matchId");
+        console.log(JSON.stringify(id.innerHTML));
+        $.ajax({
+            url: '/match/updateMatch/' + id.innerHTML,
+            type: 'put',
+            data: $('#matchUpdate').serialize(),
+            success: function(res) {
+                console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);	
+            }
+        });
+    }
+
+    function updateMatch(val) {
+        console.log(val);
+        $.ajax({
+            url: '/tournament/getMatchById/' + val,
+            type: 'GET',
+            success: function(res) {
+                console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+                res = JSON.parse(res);
+                var str = "<div class=\"form-row\"><div class=\"col-md-4 mb-3\"><label for=\"matchNumber\">Match Number</label>";
+                str += " <input type=\"text\" class=\"form-control\" id=\"matchNumber\" placeholder=\"MatchNumber\" value=\"" + res.matchNumber + "\" name=\"matchNumber\">";
+                str += "</div><div class=\"col-md-4 mb-3\"><label for=\"matchPlace\">Match Place</label>";
+                str += "<input type=\"text\" class=\"form-control\" id=\"matchPlace\" placeholder=\"Match Place\" value=\"" + res.city + "\" name=\"city\">";
+                str += "</div><div class=\"col-md-4 mb-3\"><label for=\"matchStatus\">Match Status</label> <div class=\"input-group\">";
+                str += "<input type=\"text\" class=\"form-control\" id=\"matchStatus\" placeholder=\"Match Status\" aria-describedby=\"inputGroupPrepend\" required value=\"" + res.matchStatus + "\" name=\"matchStatus\">";
+                str += "</div></div></div>";
+                str += "<div style=\"visibility: hidden;\" id=\"matchId\" >" + res.matchId + "</div>";
+                str += "<div class=\"form-row\"><h1 style=\"text-align=center;\" name=\"" + res.teamOne.teamName + "\">" + res.teamOne.teamName + "</h1> ";
+                str += "<div class=\"table-responsive\"> <table class=\"table\"><thead class=\"thead-dark\"><tr><th scope=\"col\">#</th><th scope=\"col\">Player Name</th>";
+                str += "<th scope=\"col\">Score</th><th scope=\"col\">Passes</th><th scope=\"col\">Saves</th><th scope=\"col\">Attempts</th>";
+                str += "<th scope=\" col \">Misses</th></tr></thead>";
+                for (var i = 0; i < res.teamOne.players.length; i++) {
+                    str += "<tbody><tr><th scope=\"row\">" + i + 1 + "</th>";
+                    str += "<td><input type=\"text\" placeholder=\"Enter player name\" value=\"" + res.teamOne.players[i].userName + "\" name=\"" + "teamOne" + i + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter Score\" value=\"" + res.teamOne.players[i].goals + "\" name=\"" + "teamOne" + i + "Goals\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter passes\" value=\"" + res.teamOne.players[i].passes + "\" name=\"" + "teamOne" + i + "Passes\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter saves\" value=\"" + res.teamOne.players[i].goalAttempts + "\" name=\"" + "teamOne" + i + "GoalAttempts\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter goal attempts\" value=\"" + res.teamOne.players[i].saves + "\" name=\"" + "teamOne" + i + "Saves\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter misses\" value=\"" + res.teamOne.players[i].goalMisses + "\" value=\"" + "teamOne" + i + "GoalMisses\"></td></tr></tbody>";
+                }
+                str += "</table></div></div>";
+
+                str += "<div class=\"form-row\"><h1 style=\"text-align=center;\" name=\"" + res.teamTwo.teamName + "\">" + res.teamTwo.teamName + "</h1>";
+                str += "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"thead-dark\"><tr><th scope=\"col\">#</th><th scope=\"col\">Player Name</th>";
+                str += "<th scope=\"col\">Score</th><th scope=\"col\">Passes</th><th scope=\"col\">Saves</th><th scope=\"col\">Attempts</th>";
+                str += "<th scope=\" col \">Misses</th></tr></thead>";
+                for (var i = 0; i < res.teamTwo.players.length; i++) {
+                    str += "<tbody><tr><th scope=\"row\">" + i + 1 + "</th>";
+                    str += "<td><input type=\"text\" placeholder=\"Enter player name\" value=\"" + res.teamTwo.players[i].userName + "\" name=\"" + "teamTwo" + i + "\" readonly disabled></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter Score\" value=\"" + res.teamTwo.players[i].goals + "\" name=\"" + "teamTwo" + i + "Goals\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter passes\" value=\"" + res.teamTwo.players[i].passes + "\" name=\"" + "teamTwo" + i + "Passes\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter saves\" value=\"" + res.teamTwo.players[i].goalAttempts + "\" name=\"" + "teamTwo" + i + "GoalAttempts\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter goal attempts\" value=\"" + res.teamTwo.players[i].saves + "\" name=\"" + "teamTwo" + i + "Saves\"></td>";
+                    str += "<td><input type=\"number\"  id=\"myNumber\" placeholder=\"Enter misses\" value=\"" + res.teamTwo.players[i].goalMisses + "\" name=\"" + "teamTwo" + i + "GoalMisses\"></td></tr></tbody>";
+                }
+                str += "</table></div></div>";
+                var tag = document.getElementById('data');
+                tag.innerHTML = str;
+            }
+        });
+    }
+    $(document).ready(function() {
+        var userRole = localStorage.getItem("userRole");
+        if (userRole !== "scorer") {
+            $(".scorer").css("display", "none");
+        }
+    });
+</Script>

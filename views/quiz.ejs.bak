@@ -1,0 +1,157 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h4 class="border-bottom border-gray pb-2 mb-0" style="color: #e85a4f;">Select the Quiz</h4>
+                <div class="list-group">
+                    <a href="#" id="current" onclick="callQuiz(id)" class="list-group-item list-group-item-action active">
+                        Current Week quiz
+                    </a>
+                    <a href="#" id="week1" onclick="callQuiz(id)" class="list-group-item list-group-item-action">week 1</a>
+                    <a href="#" id="week2" onclick="callQuiz(id)" class="list-group-item list-group-item-action">Week 2</a>
+                    <a href="#" id="week3" onclick="callQuiz(id)" class="list-group-item list-group-item-action">Week 3</a>
+                    <a href="#" id="week4" onclick="callQuiz(id)" class="list-group-item list-group-item-action " tabindex="-1" aria-disabled="true">Week 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h4 class="border-bottom border-gray pb-2 mb-0">Weekly Quiz</h4>
+                <form id="quiz">
+                    <ul id="myUL" class="list-group">
+
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h4 class="border-bottom border-gray pb-2 mb-0" style="color: #e85a4f;>Week leading</h4>
+                <ul class="list-group" id="leaderBoard">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<script>
+    $(document).ready(function() {
+        callQuiz("current");
+        $.ajax({
+            url: '/quiz/getLeaderBoard/',
+            type: 'GET',
+            success: function(res) {
+                res = JSON.parse(res);
+                let lead = "";
+                for (var i = 0; i < res.length; i++) {
+                    lead += "<li class=\"list-group-item d-flex justify-content-between align-items-center\">" + res[i].userName;
+                    lead += "<span class=\"badge badge-primary badge-pill\">" + (i + 1) + "</span></li>";
+                }
+                let tag = document.getElementById("leaderBoard");
+                tag.innerHTML = lead;
+            },
+            error: function(req, res, err) {
+                alert(req.responseText);
+            }
+        });
+
+    });
+
+    function updateQuizScore() {
+        let q = JSON.parse(localStorage.getItem("qz"));
+        // q = JSON.parse(q);
+        let data = $('#quiz').serializeArray();
+        console.log(q);
+        var score = 0;
+        for (var i = 0; i < data.length; i++) {
+            let val = Object.values(data[i]);
+            if (q[val[0]] === val[1]) {
+                score += 10;
+            }
+            console.log(q[val[0]] + " ===" + val[1]);
+
+        }
+        //console.log(score);
+        localStorage.removeItem("q");
+        var a = localStorage.getItem("login");
+
+        // k = JSON.stringify(k);
+        let b = JSON.parse(a);
+        console.log(b);
+        let m = JSON.parse(b);
+        let tag = document.getElementById("playerName");
+        score = {
+            quizScore: score
+        };
+        $.ajax({
+            url: '/quiz/update/' + m.userName,
+            type: 'PUT',
+            data: score,
+            success: function(res) {
+                alert("Team created");
+                location.reload();
+                //localStorage.setItem("login", res);
+            },
+            error: function(req, res, err) {
+                alert(req.responseText);
+            }
+        });
+    }
+
+    function callQuiz(id) {
+        console.log(id);
+        $.ajax({
+            url: '/quiz/getQuizQuestions',
+            type: 'GET',
+            success: function(res) {
+                //console.log('form submitted.' + res);
+                //localStorage.setItem("login", res);
+                res = JSON.parse(res);
+                let str = "";
+                let q = [];
+                for (var i = 0; i < res.length; i++) {
+                    q.push(
+                        res[i].answer
+                    );
+                    str += "<li class=\"list-group-item\"><p>" + (i + 1) + " " + res[i].question + "</p><div class=\"container-fluid\"><div class=\"form-check form-check-inline\">";
+                    str += "<input class=\"form-check-input\" type=\"radio\" name=\"" + i + "\" id=\"" + i + "\" value=\"" + res[i].options[0] + "\">";
+                    str += "<label class=\"form-check-label\" for=\"" + i + "\">" + res[i].options[0] + "</label></div><div class=\"form-check form-check-inline\">";
+                    str += "<input class=\"form-check-input\" type=\"radio\" name=\"" + i + "\" id=\"" + i + "\" value=\"" + res[i].options[1] + "\">";
+                    str += "<label class=\"form-check-label\" for=\"" + i + "\">" + res[i].options[1] + "</label><br></div><div class=\"form-check form-check-inline\">";
+                    str += "<input class=\"form-check-input\" type=\"radio\" name=\"" + i + "\" id=\"" + i + "\" value=\"" + res[i].options[2] + "\">";
+                    str += "<br><label class=\"form-check-label\" for=\"" + i + "\">" + res[i].options[2] + "</label></div></div></li>";
+
+                }
+                str += "<li class=\"list-group-item\" align=\"center\"><button type=\"button\" class=\"btn btn-primary\" onclick=\"updateQuizScore()\">Submit Quiz</button></li>";
+                let tag = document.getElementById("myUL");
+                tag.innerHTML = str;
+                let data = [
+                    "week1",
+                    "week2",
+                    "week3",
+                    "week4",
+                    "current"
+                ];
+                for (var c = 0; c < data.length; c++) {
+                    // tag = getElementById(data[c]);
+                    if (data[c] === id) {
+                        var element = document.getElementById(data[c]);
+                        element.classList.add("active");
+                    } else {
+                        var element = document.getElementById(data[c]);
+                        element.classList.remove("active");
+                    }
+
+
+                }
+                q = JSON.stringify(q);
+                localStorage.setItem("qz", q);
+
+            },
+            error: function() {
+                alert("some error occured while fetching data");
+            }
+        });
+    }
+</script>
