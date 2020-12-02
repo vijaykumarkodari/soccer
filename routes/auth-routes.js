@@ -31,7 +31,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     //console.log("emo" + query);
     var responceDate = { 'id': req.user.googleId }
         //req.session.valid = true;
-    res.redirect('http://localhost:3000/home?name=' + req.user.googleId);
+    res.redirect('http://soccer-spike.herokuapp.com/home?name=' + req.user.googleId);
     //res.redirect('http://localhost:4200/auth/login?' + req.user);
     //res.redirect('http://localhost:4200/dashboard');
     // res.send(req.user);
