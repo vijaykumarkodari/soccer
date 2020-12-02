@@ -22,7 +22,7 @@ const matchSchema = new schema({
     },
     matchStatus: {
         type: String,
-        default: "win"
+        default: "NOT_COMPLETED"
     },
 
     teamOne: {
