@@ -6,6 +6,7 @@
 <div class="login-page">
     <div class="form">
         <form class="create-team-form" id="createTeamId">
+<label id="error" style="color: red;"></label>
             <fieldset>
                 <div class="multiselect">
                     <div class="selectBox" onclick="showCheckboxes()">
@@ -24,7 +25,7 @@
                     </div>
                 </div>
 <br>
-                <input name="teamName" type="text" placeholder="Team name" required/>
+                <input name="teamName" id="teamName"  type="text" placeholder="Team name" required/>
                 <br/>
 
                 <label></label>
@@ -71,7 +72,7 @@
 
                     // lielememt += "<li><a tabindex=\"0\"><label class=\"checkbox\"><input type=\"checkbox\" value='" + res[i].userName + "'>" + res[i].userName + "</label></a></li>"
                 }
-                console.log(optionsAsString);
+               // console.log(optionsAsString);
                 var t = document.getElementById("checkboxes");
                 t.innerHTML = optionsAsString;
                 //  console.log(lielememt);
@@ -96,6 +97,10 @@
 
     $('#addTeam').click(
         function() {
+        if ($("#addTeam").val() === "") {
+                $("#error").val("Please enter team name");
+                console.log("eror");
+            } else {
             $.ajax({
                 url: '/tournament/addTeam',
                 type: 'POST',
@@ -109,6 +114,8 @@
                     alert(req.responseText);
                 }
             });
+return false;
+            }
 
         });
 </Script>

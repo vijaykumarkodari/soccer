@@ -6,9 +6,13 @@
                 <input name="lastName" type="text" placeholder="Last name" required/>
                 <input name="userName" type="text" placeholder="User Name" required/>
                 <input name="password" id="password1" type="password" placeholder="Password" required/>
-                <input name="team" type="text" placeholder="Team Name" />
-                <input name="userRole" type="text" placeholder="User role" />
-                <input name="email" type="text" placeholder="Email address" />
+                <input name="team" type="text" placeholder="Team Name" /><br>
+                <select name="userRole" id="userRole">
+                    <option value="player">Player</option>
+                    <option value="scorer">Scorer</option>
+                    <option value="admin">Admin</option>
+                  </select><br> 
+                  <input name="email" type="text" placeholder="Email address" />
                 <input name="phoneNumber" type="text" placeholder="Phone number" />
                 <input name="city" type="text" placeholder="City" required/>
                 <input name="zipcode" type="text" placeholder="Zip code" required/>
@@ -18,6 +22,7 @@
             </fieldset>
         </form>
         <form class="login-form" id="loginformId">
+        <label id="error" style="color: red;"></label>
             <input name="username" id="userName" type="text" placeholder="username" required/>
             <input name="password" id="password" type="password" placeholder="password" required/>
             <button id="loginButtion" style="
@@ -42,14 +47,18 @@
 
 
         function() {
+        if ($('#username').val() === "" || $('#password').val() === "") {
+                $("#error").val("Please enter all mondatory fields");
+                return;
+            } else {
             $.ajax({
                 url: '/auth/local',
                 type: 'POST',
                 data: $('#loginformId').serialize(),
                 success: function(res) {
 
-                    console.log('form submitted.' + res);
-                    console.log(JSON.parse(res).userRole);
+                    //console.log('form submitted.' + res);
+                   // console.log(JSON.parse(res).userRole);
 
                     localStorage.setItem("userRole", JSON.parse(res).userRole);
                     localStorage.setItem("login", JSON.stringify(res));
@@ -61,12 +70,18 @@
                     alert("Invalid login credentials");
                 }
             });
+           
+ }
             // alert("invalid login");
             return false;
         });
 
     $('#register').click(
         function() {
+         if ($('#lastName').val() === "" || $('#firstName').val() === "" || $('#username').val() === "" || $('#password').val() === "" || $('#email').val() === "" || $('#city').val() === "") {
+                $("#error").val("Please enter user name/password");
+                return;
+            } else {
             $.ajax({
                 url: '/user/signup',
                 type: 'POST',
@@ -84,6 +99,7 @@
                     alert(request.responseText);
                 }
             });
+}
             return false;
         });
 </Script>

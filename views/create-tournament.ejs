@@ -6,6 +6,7 @@
 <div class="login-page">
     <div class="form">
         <form class="create-tournament-form" id="createTournamentId">
+ <label id="error" style="color: red;"></label>
             <fieldset>
                 <div class="multiselect">
                     <div class="selectBox" onclick="showCheckboxes()">
@@ -24,9 +25,9 @@
                     </div>
                 </div>
                 <br>
-                <input name="tournamentName" type="text" placeholder="Tournament name" required/>
-                <input name="city" type="text" placeholder="City name" required/>
-                <input name="zip" type="text" placeholder="Zip code" required/>
+                <input name="tournamentName" id="tournamentName" type="text" placeholder="Tournament name" required/>
+                <input name="city" id="city" type="text" placeholder="City name" required/>
+                <input name="zip" id="zip" type="text" placeholder="Zip code" required/>
                 <br/>
 
                 <label></label>
@@ -98,6 +99,9 @@
 
     $('#createTournament').click(
         function() {
+         if ($("#tournamentName").val() === "" || $("#zip").val() === "" || $("#city").val() === "") {
+                $("error").val("Please enter all fields");
+            } else {
             $.ajax({
                 url: '/tournament/createTournament',
                 type: 'POST',
@@ -112,5 +116,7 @@
                     alert(req.responseText);
                 }
             });
+             return false;
+            }
         });
 </Script>

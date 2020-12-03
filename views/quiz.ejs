@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-3">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
-                <h4 class="border-bottom border-gray pb-2 mb-0" style="color: #e85a4f;>Week leading</h4>
+                <h4 class="border-bottom border-gray pb-2 mb-0" style="color: #e85a4f;">Week leading</h4>
                 <ul class="list-group" id="leaderBoard">
 
                 </ul>
@@ -89,7 +89,7 @@
             type: 'PUT',
             data: score,
             success: function(res) {
-                alert("Team created");
+                alert("Quiz submitted: score : " + score.quizScore);
                 location.reload();
                 //localStorage.setItem("login", res);
             },
