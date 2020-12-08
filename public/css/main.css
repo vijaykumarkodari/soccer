@@ -4,7 +4,7 @@
 }
 
 #footer {
-    background: darkcyan;
+    background: #00303F;
 }
 
 #body {
@@ -140,11 +140,11 @@ h2 {
     background-color: rgba(0, 0, 0, .85);
 }
 body {
-       background: #2f4454;
-    background: -webkit-linear-gradient(right, #2f4454, #2f4454);
-    background: -moz-linear-gradient(right, #2f4454, #2f4454);
-    background: -o-linear-gradient(right, #2f4454, #2f4454);
-    background: linear-gradient(to left, #2f4454, #2f4454);
+    background: #7A9D96;
+    background: -webkit-linear-gradient(right, #7A9D96, #7A9D96);
+    background: -moz-linear-gradient(right, #7A9D96, #7A9D96);
+    background: -o-linear-gradient(right, #7A9D96, #7A9D96);
+    background: linear-gradient(to left, #7A9D96, #7A9D96);
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

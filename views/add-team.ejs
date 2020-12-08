@@ -97,16 +97,13 @@
 
     $('#addTeam').click(
         function() {
-        if ($("#addTeam").val() === "") {
-                $("#error").val("Please enter team name");
-                console.log("eror");
-            } else {
+        
             $.ajax({
                 url: '/tournament/addTeam',
                 type: 'POST',
                 data: $('#createTeamId').serialize(),
                 success: function(res) {
-                    alert("Team created");
+                    alert("Team created successfully");
                     location.reload();
                     //localStorage.setItem("login", res);
                 },
@@ -115,7 +112,7 @@
                 }
             });
 return false;
-            }
+            
 
         });
 </Script>

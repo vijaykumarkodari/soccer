@@ -99,9 +99,6 @@
 
     $('#createTournament').click(
         function() {
-         if ($("#tournamentName").val() === "" || $("#zip").val() === "" || $("#city").val() === "") {
-                $("error").val("Please enter all fields");
-            } else {
             $.ajax({
                 url: '/tournament/createTournament',
                 type: 'POST',
@@ -116,7 +113,6 @@
                     alert(req.responseText);
                 }
             });
-             return false;
-            }
+            return false;
         });
 </Script>
