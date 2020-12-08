@@ -51,10 +51,10 @@
                 $("#error").val("Please enter all mondatory fields");
                 return;
             } else {
-            $.ajax({
-                url: '/auth/local',
-                type: 'POST',
-                data: $('#loginformId').serialize(),
+           $.ajax({
+                    url: '/auth/local',
+                    type: 'POST',
+                    data: $('#loginformId').serialize(),
                 success: function(res) {
 
                     //console.log('form submitted.' + res);
