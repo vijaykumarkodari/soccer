@@ -62,7 +62,10 @@
 
                     localStorage.setItem("userRole", JSON.parse(res).userRole);
                     localStorage.setItem("login", JSON.stringify(res));
-                    window.location.replace("http://soccer-spike.herokuapp.com/home");
+                    setTimeout(() => {
+                        window.location.replace("http://soccer-spike.herokuapp.com/home");
+                    }, 1000);
+                    //window.location.replace("http://soccer-spike.herokuapp.com/home");
 
 
                 },
