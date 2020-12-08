@@ -2,6 +2,7 @@
     <div class="form">
         <form class="register-form" id="registerFormId">
             <fieldset>
+                <label id="error" style="color: red;"></label>
                 <input name="firstName" type="text" placeholder="First name" required/>
                 <input name="lastName" type="text" placeholder="Last name" required/>
                 <input name="userName" type="text" placeholder="User Name" required/>
@@ -11,8 +12,8 @@
                     <option value="player">Player</option>
                     <option value="scorer">Scorer</option>
                     <option value="admin">Admin</option>
-                  </select><br> 
-                  <input name="email" type="text" placeholder="Email address" />
+                  </select><br>
+                <input name="email" type="text" placeholder="Email address" />
                 <input name="phoneNumber" type="text" placeholder="Phone number" />
                 <input name="city" type="text" placeholder="City" required/>
                 <input name="zipcode" type="text" placeholder="Zip code" required/>
@@ -22,9 +23,9 @@
             </fieldset>
         </form>
         <form class="login-form" id="loginformId">
-        <label id="error" style="color: red;"></label>
-            <input name="username" id="userName" type="text" placeholder="username" required/>
-            <input name="password" id="password" type="password" placeholder="password" required/>
+            <label id="error" style="color: red;"></label>
+            <input class="required" name="username" id="userName" type="text" placeholder="username" required/>
+            <input class="required" name="password" id="password" type="password" placeholder="password" required/>
             <button id="loginButtion" style="
             background-color:#da7b93;">Login</button>
             <label></label>
@@ -45,64 +46,63 @@
     });
     $('#loginButtion').click(
 
-
         function() {
-        if ($('#username').val() === "" || $('#password').val() === "") {
+            // console.log($('#username').val() + "test");
+            if ($('#username').val() === "" || $('#password').val() === "") {
                 $("#error").val("Please enter all mondatory fields");
                 return;
             } else {
-           $.ajax({
+
+
+                $.ajax({
                     url: '/auth/local',
                     type: 'POST',
                     data: $('#loginformId').serialize(),
-                success: function(res) {
+                    success: function(res) {
 
-                    //console.log('form submitted.' + res);
-                   // console.log(JSON.parse(res).userRole);
+                        console.log('form submitted.' + res);
+                        console.log(JSON.parse(res).userRole);
 
-                    localStorage.setItem("userRole", JSON.parse(res).userRole);
-                    localStorage.setItem("login", JSON.stringify(res));
-                    setTimeout(() => {
-                        window.location.replace("http://soccer-spike.herokuapp.com/home");
-                    }, 1000);
-                    //window.location.replace("http://soccer-spike.herokuapp.com/home");
+                        localStorage.setItem("userRole", JSON.parse(res).userRole);
+                        localStorage.setItem("login", JSON.stringify(res));
+                        window.location.replace("https://soccer-spike.herokuapp.com/home");
 
 
-                },
-                error: function(request, status, error) {
-                    alert("Invalid login credentials");
-                }
-            });
-           
- }
+                    },
+                    error: function(request, status, error) {
+                        alert("Invalid login credentials");
+                    }
+                });
+            }
             // alert("invalid login");
             return false;
         });
 
     $('#register').click(
+
         function() {
-         if ($('#lastName').val() === "" || $('#firstName').val() === "" || $('#username').val() === "" || $('#password').val() === "" || $('#email').val() === "" || $('#city').val() === "") {
+            if ($('#lastName').val() === "" || $('#firstName').val() === "" || $('#username').val() === "" || $('#password').val() === "" || $('#email').val() === "" || $('#city').val() === "") {
                 $("#error").val("Please enter user name/password");
                 return;
             } else {
-            $.ajax({
-                url: '/user/signup',
-                type: 'POST',
-                data: $('#registerFormId').serialize(),
-                success: function(res) {
-                    console.log('form submitted.' + res);
-                    alert("Successfully registered please login");
-                    //localStorage.setItem("login", res);
-                    setTimeout(() => {
-                        window.location.replace("http://soccer-spike.herokuapp.com/login");
-                    }, 2000);
+                $.ajax({
+                    url: '/user/signup',
+                    type: 'POST',
+                    data: $('#registerFormId').serialize(),
+                    success: function(res) {
+                        console.log('form submitted.' + res);
+                        alert("Successfully registered please login");
+                        //localStorage.setItem("login", res);
+                        setTimeout(() => {
+                            window.location.replace("https://soccer-spike.herokuapp.com/login");
+                        }, 2000);
 
-                },
-                error: function(request, status, error) {
-                    alert(request.responseText);
-                }
-            });
-}
+                    },
+                    error: function(request, status, error) {
+                        alert(request.responseText);
+                    }
+                });
+            }
             return false;
         });
 </Script>
