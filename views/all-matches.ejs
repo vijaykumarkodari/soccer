@@ -149,7 +149,7 @@
             type: 'GET',
             success: function(res) {
                 console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var str = "<div style=\"margin-left:300px\" > <div class=\"row\"> <h2   style=\"color:crimson\"> " + res.teamOne.teamName.charAt(0).toUpperCase() + res.teamOne.teamName.slice(1) + " vs " + res.teamTwo.teamName.charAt(0).toUpperCase() + res.teamTwo.teamName.slice(1) + " </h2> </div>  ";
                 str += "<div class=\"row\" style=\"margin-left:70px\" ><h2 style=\"color:blue\"> " + res.teamOne.teamScore + "&nbsp;" + + +res.teamTwo.teamScore + " </h2></div></div>"
@@ -207,7 +207,7 @@
             success: function(res) {
                 console.log('form submitted.' + res);
                 alert("Scores updated")
-                    //localStorage.setItem("login", res);	
+                    localStorage.setItem("login", res);	
             }
         });
     }
@@ -219,7 +219,7 @@
             type: 'GET',
             success: function(res) {
                 console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var str = "<div style=\"margin-left:300px\" > <div class=\"row\"> <h2   style=\"color:crimson\"> " + res.teamOne.teamName.charAt(0).toUpperCase() + res.teamOne.teamName.slice(1) + " vs " + res.teamTwo.teamName.charAt(0).toUpperCase() + res.teamTwo.teamName.slice(1) + " </h2> </div>  ";
                 str += "<div class=\"row\" style=\"margin-left: 25px\"><input type=\"text\" style=\"width:15%;margin-right: 10px;\" class=\"form-control\" id=\"team1score\" placeholder=\"MatchNumber\" value=\"" + res.teamOne.teamScore + "\" name=\"team1score\"> <input type=\"text\" style=\"width:15%\" class=\"form-control\" id=\"team2score\" placeholder=\"MatchNumber\" value=\"" + res.teamTwo.teamScore + "\" name=\"team2score\"> </div></div>"

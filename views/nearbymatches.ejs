@@ -99,7 +99,7 @@
             type: 'GET',
             success: function(res) {
                 console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var str = "<div style=\"margin-left:300px\" > <div class=\"row\"> <h2   style=\"color:crimson\"> " + res.teamOne.teamName.charAt(0).toUpperCase() + res.teamOne.teamName.slice(1) + " vs " + res.teamTwo.teamName.charAt(0).toUpperCase() + res.teamTwo.teamName.slice(1) + " </h2> </div>  ";
                 str += "<div class=\"row\" style=\"margin-left:70px\" ><h2 style=\"color:blue\"> " + res.teamOne.teamScore + "&nbsp;" + + +res.teamTwo.teamScore + " </h2></div></div>"
@@ -156,7 +156,7 @@
             data: $('#matchUpdate').serialize(),
             success: function(res) {
                 console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);	
+                localStorage.setItem("login", res);	
             }
         });
     }
@@ -168,7 +168,7 @@
             type: 'GET',
             success: function(res) {
                 console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var str = "<div class=\"form-row\"><div class=\"col-md-4 mb-3\"><label for=\"matchNumber\">Match Number</label>";
                 str += " <input type=\"text\" class=\"form-control\" id=\"matchNumber\" placeholder=\"MatchNumber\" value=\"" + res.matchNumber + "\" name=\"matchNumber\">";

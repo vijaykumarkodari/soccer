@@ -21,7 +21,7 @@
             type: 'GET',
             success: function(res) {
                 // console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var matches = [];
                 var cnt = 1;
@@ -50,8 +50,9 @@
                     success: function(res) {
                         // console.log('form shedule submitted.' + res);
                         //alert('Successfuly Sheduled');
+						localStorage.setItem("login", res);
                         alert(res);
-                        //localStorage.setItem("login", res);
+                      
                     }
                 });
 
@@ -65,7 +66,7 @@
             type: 'GET',
             success: function(res) {
                 //console.log('form submitted.' + res);
-                //localStorage.setItem("login", res);
+                localStorage.setItem("login", res);
                 res = JSON.parse(res);
                 var child = "";
                 var i = 0;
